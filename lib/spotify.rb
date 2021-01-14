@@ -116,4 +116,25 @@ module Spotify
     )
     return response
   end
+
+
+  def self.check_env()
+    vars = [
+			'SPOTIFY_PLAYLIST_ID',
+			'SPOTIFY_CLIENT_ID',
+			'SPOTIFY_CLIENT_SECRET',
+			'SPOTIFY_MARKET',
+    ]
+    missing_vars = []
+    vars.each do |var|
+      if not ENV.has_key?(var)
+        missing_vars.append(var)
+      end
+    end
+    message = ''
+    if missing_vars.length > 0
+      message = ".env file missing variables:\n#{missing_vars.join(', ')}"
+    end
+    return message
+  end
 end
