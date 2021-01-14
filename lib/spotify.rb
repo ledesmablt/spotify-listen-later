@@ -41,6 +41,7 @@ module Spotify
     response = RestClient.post(url, payload, headers={})
     data = JSON.parse(response.body)
     File.write(AUTH_STATE_FILENAME, response.body)
+    puts "\nAccess tokens saved to #{AUTH_STATE_FILENAME}!"
     return data['access_token']
   end
 
