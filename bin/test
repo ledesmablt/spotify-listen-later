@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative '../lib/spotify'
+
+
+# access_token = authorize_user
+access_token = Spotify.refresh_access_token
+hist = Spotify.get_listening_history(access_token)
+res = Spotify.update_listen_later(ENV['SPOTIFY_PLAYLIST_ID'], hist, access_token)
+puts res
