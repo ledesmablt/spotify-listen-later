@@ -95,27 +95,29 @@ module Spotify
       track = p_item['track']
       if history_uris.include? track['uri']
         if track.has_key?('linked_from')
-          playlist_uris.append({
-            uri: track['linked_from']['uri']
-          })
+          uri = track['linked_from']['uri']
+        else
+          uri = track['uri']
         end
+          playlist_uris.append({
+            uri: uri
+          })
       end
     end
     if playlist_uris.length == 0
-      return
+      return 'No tracks deleted'
     end
     # delete tracks already listened to
     payload = {
       tracks: playlist_uris
     }
-    puts payload
     response = RestClient::Request.execute(
       method: 'delete',
       url: base_url,
       payload: payload.to_json,
       headers: headers,
     )
-    return response
+    return response.body
   end
 
 
