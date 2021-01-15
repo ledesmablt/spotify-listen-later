@@ -99,7 +99,7 @@ module Spotify
         else
           uri = track['uri']
         end
-          playlist_uris.append({
+          playlist_uris.push({
             uri: uri
           })
       end
@@ -131,7 +131,7 @@ module Spotify
     missing_vars = []
     vars.each do |var|
       if not ENV.has_key?(var)
-        missing_vars.append(var)
+        missing_vars.push(var)
       end
     end
     message = ''
